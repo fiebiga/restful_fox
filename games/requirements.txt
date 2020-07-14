@@ -1,0 +1,7 @@
+gunicorn
+flask
+flask-restful
+pymongo
+mongoengine
+pydantic
+foxdemo-lib

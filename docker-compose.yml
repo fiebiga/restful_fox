@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  games:
+    build: ./games
+    ports:
+      - '5000:8080'
+    depends_on:
+      - mongo
+    env_file:
+      - ./docker.env
+  game_summary:
+    build: ./game_summary
+    ports:
+      - '5001:8080'
+    depends_on:
+      - mongo
+    env_file:
+      - ./docker.env
+  plays:
+    build: ./plays
+    ports:
+      - '5002:8080'
+    depends_on:
+      - mongo
+    env_file:
+      - ./docker.env
+  mongo:
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    ports:
+      - 27017:27017
+    expose:
+      - '27017'
+#    volumes:
+#      - mongodb_data: Recommended: Put a path here, or the environment will initialize new every time. Uncomment the 'volumes' below as well
+    env_file:
+      - ./docker.env
+
+#volumes:
+#    mongodb_data: {}
