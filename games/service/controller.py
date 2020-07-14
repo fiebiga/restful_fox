@@ -24,6 +24,6 @@ class GamesWebController(ApiController):
     def post(self):
         return self.service.create(Game(**request.get_json())).dict()
 
-    def delete(self):
-        self.service.delete(**request.args)
+    def delete(self, id: str = None):
+        self.service.delete(id=id, **request.args)
 
